@@ -87,9 +87,9 @@ nsteps.day  %>% summarise(median = median(sum.steps, na.rm = TRUE))
 
 ```r
 nsteps.interval <- Data %>% group_by(interval) %>% 
-    summarise(sum.steps = sum(steps, na.rm = TRUE))
+    summarise(avg.steps = mean(steps, na.rm = TRUE))
     
-with(nsteps.interval, plot(interval,sum.steps, type = "l",
+with(nsteps.interval, plot(interval,avg.steps, type = "l",
                           xlab = "5-min Interval", 
                           main = "Averaged steps of each 5-min interval"))
 ```
@@ -101,15 +101,15 @@ with(nsteps.interval, plot(interval,sum.steps, type = "l",
 
 
 ```r
-nsteps.interval %>% filter(sum.steps == max(sum.steps))
+nsteps.interval %>% filter(avg.steps == max(avg.steps))
 ```
 
 ```
 ## Source: local data frame [1 x 2]
 ## 
-##   interval sum.steps
-##      (int)     (int)
-## 1      835     10927
+##   interval avg.steps
+##      (int)     (dbl)
+## 1      835  206.1698
 ```
 
 ## Imputing missing values
@@ -241,14 +241,12 @@ Data.NoNA
 
 ```r
 nsteps.weekday.NoNA <- Data.NoNA %>% group_by(interval,Weekday) %>% 
-    summarise(sum.steps = sum(steps))
+    summarise(avg.steps = mean(steps))
 
 with(nsteps.weekday.NoNA, 
-     xyplot(sum.steps ~ interval | Weekday , type = "l",
+     xyplot(avg.steps ~ interval | Weekday , type = "l",
             layout = c(1, 2), xlab = "5-min Interval", 
             main = "Averaged steps of each 5-min interval"))
 ```
 
 ![](PA1_template_files/figure-html/weekday plot-1.png)<!-- -->
-
-**Weekends present fewer steps in average, probably since the owners were resting**

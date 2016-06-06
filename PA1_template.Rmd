@@ -62,9 +62,9 @@ nsteps.day  %>% summarise(median = median(sum.steps, na.rm = TRUE))
 
 ```{r Average pattern}
 nsteps.interval <- Data %>% group_by(interval) %>% 
-    summarise(sum.steps = sum(steps, na.rm = TRUE))
+    summarise(avg.steps = mean(steps, na.rm = TRUE))
     
-with(nsteps.interval, plot(interval,sum.steps, type = "l",
+with(nsteps.interval, plot(interval,avg.steps, type = "l",
                           xlab = "5-min Interval", 
                           main = "Averaged steps of each 5-min interval"))
 ```
@@ -73,7 +73,7 @@ with(nsteps.interval, plot(interval,sum.steps, type = "l",
 2. Which 5-minute interval, on average across all the days in the dataset, contains the maximum number of steps?
 
 ```{r Max number steps}
-nsteps.interval %>% filter(sum.steps == max(sum.steps))
+nsteps.interval %>% filter(avg.steps == max(avg.steps))
 ```
 
 ## Imputing missing values
@@ -128,12 +128,10 @@ Data.NoNA
 2. Make a panel plot containing a time series plot (i.e. `type = "l"`) of the 5-minute interval (x-axis) and the average number of steps taken, averaged across all weekday days or weekend days (y-axis). 
 ```{r weekday plot}
 nsteps.weekday.NoNA <- Data.NoNA %>% group_by(interval,Weekday) %>% 
-    summarise(sum.steps = sum(steps))
+    summarise(avg.steps = mean(steps))
 
 with(nsteps.weekday.NoNA, 
-     xyplot(sum.steps ~ interval | Weekday , type = "l",
+     xyplot(avg.steps ~ interval | Weekday , type = "l",
             layout = c(1, 2), xlab = "5-min Interval", 
             main = "Averaged steps of each 5-min interval"))
 ```
-
-**Weekends present fewer steps in average, probably since the owners were resting**

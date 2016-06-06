@@ -46,6 +46,7 @@ nsteps.day <- Data %>% group_by(yearday) %>%
     
 hist(nsteps.day$sum.steps, xlab = "steps taken per day", 
      main = "Histogram of steps taken per day")
+
 ```
 
 2. Calculate and report the **mean** and **median** total number of steps taken per day
@@ -134,4 +135,5 @@ with(nsteps.weekday.NoNA,
             layout = c(1, 2), xlab = "5-min Interval", 
             main = "Averaged steps of each 5-min interval"))
 ```
+
 **Weekends present fewer steps in average, probably since the owners were resting**

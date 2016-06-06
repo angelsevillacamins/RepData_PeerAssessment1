@@ -250,4 +250,5 @@ with(nsteps.weekday.NoNA,
 ```
 
 ![](PA1_template_files/figure-html/weekday plot-1.png)<!-- -->
+
 **Weekends present fewer steps in average, probably since the owners were resting**
